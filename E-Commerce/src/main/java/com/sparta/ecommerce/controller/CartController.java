@@ -17,18 +17,21 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+    // 장바구니 추가
     @PostMapping("/cart")
     public ResponseEntity<CartResponseDto> addToCart(@RequestBody CartRequestDto requestDto) {
         CartResponseDto responseDto = cartService.addToCart(requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
+    // 사용자의 장바구니 확인
     @GetMapping("/cart/{userId}")
     public ResponseEntity<List<Cart>> getCartItems(@PathVariable Long userId) {
         List<Cart> cartItems = cartService.getCartItems(userId);
         return ResponseEntity.ok(cartItems);
     }
 
+    // 장바구니 수정
     @PutMapping("/cart")
     public ResponseEntity<CartResponseDto> updateCartItem(@RequestBody CartRequestDto requestDto) {
         CartResponseDto responseDto = cartService.updateCartItem(requestDto);

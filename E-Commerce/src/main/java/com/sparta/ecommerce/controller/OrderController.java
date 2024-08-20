@@ -44,15 +44,4 @@ public class OrderController {
         orderService.cancelOrder(orderNo);
         return ResponseEntity.ok("주문이 취소되었습니다.");
     }
-
-    // 주문 반품
-    @PutMapping("/order/{orderNo}/return")
-    public ResponseEntity<String> returnOrder(@PathVariable Long orderNo) {
-        try {
-            orderService.returnOrder(orderNo);
-            return ResponseEntity.ok("반품 신청이 완료되었습니다.");
-        } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 }

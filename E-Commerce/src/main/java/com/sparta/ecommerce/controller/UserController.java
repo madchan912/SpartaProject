@@ -15,6 +15,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // 사용자 회원 가입
     @PostMapping("/register")
     public ResponseEntity<UserRegisterResponseDto> registerUser(@RequestBody UserRegisterRequestDto requestDto) {
         try {
@@ -26,6 +27,7 @@ public class UserController {
         }
     }
 
+    // 특정 대상 정보
     @GetMapping("/user/{userId}")
     public ResponseEntity<UserRegisterRequestDto> getUser(@PathVariable Long userId) {
         try {

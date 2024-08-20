@@ -66,6 +66,7 @@ public class OrderService {
             orderItem.setQuantity(itemDto.getQuantity());
 
             product.setQuantity(product.getQuantity() - itemDto.getQuantity());  // 재고 감소
+            productRepository.save(product);  // 변경된 재고 수량을 데이터베이스에 반영
 
             orderItems.add(orderItem);
         }

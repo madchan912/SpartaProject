@@ -39,10 +39,8 @@ public class ProductService {
     public ProductDetailResponseDto getProductDetail(long productId) {
         Optional<Product> productOpt = productRepository.findById(productId);
 
-        // PRODUCT_DETAIL 테이블에서 상세 정보 조회
         Optional<ProductDetail> productDetailOpt = productDetailRepository.findById(productId);
 
-        // 상품 또는 상세 정보가 없는 경우 예외 처리
         if (!productOpt.isPresent() || !productDetailOpt.isPresent()) {
             throw new RuntimeException("상품 정보를 찾을 수 없습니다.");
         }
@@ -50,7 +48,6 @@ public class ProductService {
         Product product = productOpt.get();
         ProductDetail productDetail = productDetailOpt.get();
 
-        // ProductDetailResponseDto에 정보를 담아 반환
         ProductDetailResponseDto responseDto = new ProductDetailResponseDto();
         responseDto.setProductId(product.getProductId());
         responseDto.setTitle(product.getTitle());

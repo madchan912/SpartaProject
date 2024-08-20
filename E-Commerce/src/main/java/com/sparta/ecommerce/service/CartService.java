@@ -25,6 +25,7 @@ public class CartService {
     @Autowired
     private ProductRepository productRepository;
 
+    // 사용자 장바구니에 저장
     public CartResponseDto addToCart(CartRequestDto requestDto) {
         User user = userRepository.findById(requestDto.getUsrId()).orElseThrow();
         Product product = productRepository.findById(requestDto.getPrdId()).orElseThrow();
@@ -46,6 +47,7 @@ public class CartService {
         return cartRepository.findByUserUserId(userId);
     }
 
+    // 사용자 장바구니 업데이트
     public CartResponseDto updateCartItem(CartRequestDto requestDto) {
         Cart cart = cartRepository.findByUserUserIdAndProductProductId(requestDto.getUsrId(), requestDto.getPrdId())
                 .orElseThrow();

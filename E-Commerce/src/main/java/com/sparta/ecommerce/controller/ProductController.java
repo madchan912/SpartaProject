@@ -19,14 +19,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // 전체 상품의 정보를 가져오는 api
+    // 전체 상품의 정보
     @GetMapping("/products")
     public ResponseEntity<List<ProductResponseDto>> getProducts() {
         List<ProductResponseDto> products = productService.getProducts();
         return ResponseEntity.ok(products);
     }
 
-    // 특정 상품의 상세 정보를 가져오는 api
+    // 특정 상품의 상세 정보
     @GetMapping("/products/{productId}")
     public ResponseEntity<ProductDetailResponseDto> getProductDetail(@PathVariable Long productId) {
         ProductDetailResponseDto productDetail = productService.getProductDetail(productId);
