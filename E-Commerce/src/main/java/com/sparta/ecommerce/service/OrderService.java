@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 public class OrderService {
@@ -95,5 +97,39 @@ public class OrderService {
         // 주문 상태를 취소 완료로 변경
         order.setStatus("취소완료");
         orderRepository.save(order);
+    }
+
+    // 주문 반품
+    public void returnOrder(Long orderNo) {
+        Order order = orderRepository.findById(orderNo)
+                .orElseThrow(() -> new RuntimeException("주문을 찾을 수 없습니다."));
+
+        if (!order.getStatus().equals("배송완료")) {
+            throw new IllegalStateException("반품은 배송 완료된 주문에 대해서만 가능합니다.");
+        }
+
+        // 반품 가능 기간 확인
+        LocalDateTime deliveredDate = order.getDate();
+        LocalDateTime returnDeadline = deliveredDate.plusDays(1);
+        if (LocalDateTime.now().isAfter(returnDeadline)) {
+            throw new IllegalStateException("반품 가능 기간이 지났습니다.");
+        }
+
+        // 일정 시간 이후 재고 복구 및 반품 상태 변경
+        List<OrderItem> orderItems = orderItemRepository.findByOrderOrderId(orderNo);
+        for (OrderItem item : orderItems) {
+            Product product = item.getProduct();
+
+            // 1일 후 재고 복구 및 반품 상태 변경 (비동기 처리 추천)
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    product.setQuantity(product.getQuantity() + item.getQuantity());
+                    productRepository.save(product);
+                    order.setStatus("반품완료");
+                    orderRepository.save(order);
+                }
+            }, 24 * 60 * 60 * 1000); // 1일 후 실행
+        }
     }
 }
