@@ -1,6 +1,7 @@
 package com.sparta.ecommerce.util;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -41,8 +42,8 @@ public class JwtUtil {
         try {
             Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
-            return false;
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new JwtException("Invalid JWT token: " + e.getMessage());
         }
     }
 

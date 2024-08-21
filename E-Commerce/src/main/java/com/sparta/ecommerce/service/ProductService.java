@@ -37,16 +37,11 @@ public class ProductService {
 
     // 특정 상품의 상세 정보를 조회 하는 메서드
     public ProductDetailResponseDto getProductDetail(long productId) {
-        Optional<Product> productOpt = productRepository.findById(productId);
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다. ID: " + productId));
 
-        Optional<ProductDetail> productDetailOpt = productDetailRepository.findById(productId);
-
-        if (!productOpt.isPresent() || !productDetailOpt.isPresent()) {
-            throw new RuntimeException("상품 정보를 찾을 수 없습니다.");
-        }
-
-        Product product = productOpt.get();
-        ProductDetail productDetail = productDetailOpt.get();
+        ProductDetail productDetail = productDetailRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("상품 상세 정보를 찾을 수 없습니다. ID: " + productId));
 
         ProductDetailResponseDto responseDto = new ProductDetailResponseDto();
         responseDto.setProductId(product.getProductId());

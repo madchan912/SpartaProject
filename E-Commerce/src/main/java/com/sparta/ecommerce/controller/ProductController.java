@@ -4,16 +4,15 @@ import com.sparta.ecommerce.dto.ProductDetailResponseDto;
 import com.sparta.ecommerce.dto.ProductResponseDto;
 import com.sparta.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class ProductController {
 
     @Autowired
@@ -28,9 +27,13 @@ public class ProductController {
 
     // 특정 상품의 상세 정보
     @GetMapping("/products/{productId}")
-    public ResponseEntity<ProductDetailResponseDto> getProductDetail(@PathVariable Long productId) {
-        ProductDetailResponseDto productDetail = productService.getProductDetail(productId);
-        return ResponseEntity.ok(productDetail);
+    public ResponseEntity<?> getProductDetail(@PathVariable Long productId) {
+        try {
+            ProductDetailResponseDto productDetail = productService.getProductDetail(productId);
+            return ResponseEntity.ok(productDetail);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 }
