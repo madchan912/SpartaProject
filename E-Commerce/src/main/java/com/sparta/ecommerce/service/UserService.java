@@ -1,12 +1,13 @@
 package com.sparta.ecommerce.service;
 
+import com.sparta.ecommerce.dto.UserProfileUpdateDto;
 import com.sparta.ecommerce.dto.UserRegisterRequestDto;
 import com.sparta.ecommerce.dto.UserRegisterResponseDto;
 import com.sparta.ecommerce.entity.User;
 import com.sparta.ecommerce.repository.UserRepository;
 import com.sparta.ecommerce.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,18 +17,17 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private EmailVerificationService emailVerificationService; // 이메일 인증 서비스 추가
+    private EmailVerificationService emailVerificationService;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // 사용자 등록 메소드
     public UserRegisterResponseDto registerUser(UserRegisterRequestDto requestDto) throws Exception {
         User user = new User();
-
         // 비밀번호 해싱
         String hashedPassword = passwordEncoder.encode(requestDto.getUsrPssw());
         user.setPassword(hashedPassword);
-
         // 개인 정보 암호화
         user.setName(AESUtil.encrypt(requestDto.getUsrName()));
         user.setAddress(AESUtil.encrypt(requestDto.getUsrAdr()));
@@ -50,7 +50,6 @@ public class UserService {
 
         UserRegisterResponseDto responseDto = new UserRegisterResponseDto();
         responseDto.setMessage("회원가입이 완료되었습니다. 이메일 인증을 해주세요.");
-
         return responseDto;
     }
 
@@ -71,5 +70,20 @@ public class UserService {
     // 비밀번호 검증 메소드
     public boolean checkPassword(String rawPassword, String hashedPassword) {
         return passwordEncoder.matches(rawPassword, hashedPassword);
+    }
+
+    // 프로필 업데이트 메소드
+    public void updateProfile(String email, UserProfileUpdateDto updateDto) throws Exception {
+        User user = userRepository.findByEmail(AESUtil.encrypt(email))
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        if (updateDto.getAddress() != null) {
+            user.setAddress(AESUtil.encrypt(updateDto.getAddress()));
+        }
+        if (updateDto.getPhone() != null) {
+            user.setPhone(AESUtil.encrypt(updateDto.getPhone()));
+        }
+
+        userRepository.save(user);
     }
 }
