@@ -30,23 +30,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf().disable() // 필요한 경우 CSRF 보호 비활성화
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/register", "/login", "/verify","/products/**",
-                                "/like-post/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .userDetailsService(customUserDetailsService)
-                .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-                        })
+                        .anyRequest().permitAll() // 모든 요청에 대해 인증 없이 접근 가능하게 설정
                 );
-
         return http.build();
     }
 
