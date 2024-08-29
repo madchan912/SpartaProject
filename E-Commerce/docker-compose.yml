@@ -22,7 +22,11 @@ services:
       MYSQL_DATABASE: project
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p1234 && sleep 5"]
       interval: 5s
       retries: 10
+volumes:
+  mysql_data:
