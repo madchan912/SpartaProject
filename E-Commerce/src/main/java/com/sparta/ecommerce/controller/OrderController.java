@@ -11,23 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping()
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    // 주문 목록 조회
-    @GetMapping("/orders")
-    public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderService.getAllOrders();
-        return ResponseEntity.ok(orders);
-    }
-
-    // 주문 내역 상세 조회
-    @GetMapping("/order/{orderNo}")
-    public ResponseEntity<Order> getOrderDetails(@PathVariable Long orderNo) {
-        Order order = orderService.getOrderDetails(orderNo);
+    // 특정 주문 조회
+    @GetMapping("/order/{userId}/{orderId}")
+    public ResponseEntity<Order> getOrderDetails(@PathVariable Long userId, @PathVariable Long orderId) {
+        Order order = orderService.getOrderDetailsByUserIdAndOrderId(userId, orderId);
         return ResponseEntity.ok(order);
     }
 

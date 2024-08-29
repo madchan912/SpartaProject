@@ -34,14 +34,9 @@ public class OrderService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    // 주문 목록 조회
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
-
-    // 주문 내역 상세 조회
-    public Order getOrderDetails(Long orderNo) {
-        return orderRepository.findById(orderNo)
+    // 특정 주문 조회
+    public Order getOrderDetailsByUserIdAndOrderId(Long userId, Long orderId) {
+        return orderRepository.findByUserUserIdAndOrderId(userId, orderId)
                 .orElseThrow(() -> new RuntimeException("주문을 찾을 수 없습니다."));
     }
 
