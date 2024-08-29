@@ -1,4 +1,4 @@
-package com.sparta.ecommerce.common.exception;
+package com.sparta.common.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

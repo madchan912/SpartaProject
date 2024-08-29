@@ -1,4 +1,4 @@
-package com.sparta.ecommerce.common.config;
+package com.sparta.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

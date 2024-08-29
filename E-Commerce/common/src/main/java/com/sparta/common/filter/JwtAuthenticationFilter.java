@@ -1,7 +1,7 @@
-package com.sparta.ecommerce.common.filter;
+package com.sparta.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.ecommerce.common.util.JwtUtil;
+import com.sparta.common.util.JwtUtil;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

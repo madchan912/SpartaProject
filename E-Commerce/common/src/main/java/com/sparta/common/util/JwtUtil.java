@@ -1,4 +1,4 @@
-package com.sparta.ecommerce.common.util;
+package com.sparta.common.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
