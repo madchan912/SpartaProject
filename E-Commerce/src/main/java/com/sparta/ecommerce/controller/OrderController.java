@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     // 특정 주문 조회
-    @GetMapping("/order/{userId}/{orderId}")
+    @GetMapping("/{userId}/{orderId}")
     public ResponseEntity<Order> getOrderDetails(@PathVariable Long userId, @PathVariable Long orderId) {
         Order order = orderService.getOrderDetailsByUserIdAndOrderId(userId, orderId);
         return ResponseEntity.ok(order);
     }
 
     // 상품 주문
-    @PostMapping("/order")
+    @PostMapping("/")
     public ResponseEntity<OrderResponseDto> placeOrder(@RequestBody OrderRequestDto orderRequestDto) {
         OrderResponseDto responseDto = orderService.placeOrder(orderRequestDto);
         return ResponseEntity.ok(responseDto);
     }
 
     // 주문 취소
-    @DeleteMapping("/order/{orderNo}")
+    @DeleteMapping("/{orderNo}")
     public ResponseEntity<String> cancelOrder(@PathVariable Long orderNo) {
         orderService.cancelOrder(orderNo);
         return ResponseEntity.ok("주문이 취소되었습니다.");

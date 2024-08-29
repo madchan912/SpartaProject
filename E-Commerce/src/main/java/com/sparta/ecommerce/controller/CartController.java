@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/cart")
 public class CartController {
 
     @Autowired
     private CartService cartService;
 
     // 장바구니 추가
-    @PostMapping("/cart")
+    @PostMapping("/")
     public ResponseEntity<CartResponseDto> addToCart(@RequestBody CartRequestDto requestDto) {
         CartResponseDto responseDto = cartService.addToCart(requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
     // 사용자의 장바구니 확인
-    @GetMapping("/cart/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<List<Cart>> getCartItems(@PathVariable Long userId) {
         List<Cart> cartItems = cartService.getCartItems(userId);
         return ResponseEntity.ok(cartItems);
     }
 
     // 장바구니 수정
-    @PutMapping("/cart")
+    @PutMapping("/")
     public ResponseEntity<CartResponseDto> updateCartItem(@RequestBody CartRequestDto requestDto) {
         CartResponseDto responseDto = cartService.updateCartItem(requestDto);
         return ResponseEntity.ok(responseDto);
