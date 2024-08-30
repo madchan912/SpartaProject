@@ -1,4 +1,4 @@
-package com.sparta.ecommerce.user.service;
+package com.sparta.ecommerce.userservice.service;
 
 import com.sparta.ecommerce.common.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

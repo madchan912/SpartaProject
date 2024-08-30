@@ -1,6 +1,6 @@
-package com.sparta.ecommerce.order.repository;
+package com.sparta.ecommerce.orderservice.repository;
 
-import com.sparta.ecommerce.order.entity.Cart;
+import com.sparta.ecommerce.orderservice.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

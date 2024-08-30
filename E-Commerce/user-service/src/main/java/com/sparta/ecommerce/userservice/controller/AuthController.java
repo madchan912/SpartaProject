@@ -1,8 +1,8 @@
-package com.sparta.ecommerce.user.controller;
+package com.sparta.ecommerce.userservice.controller;
 
-import com.sparta.ecommerce.user.dto.LoginRequestDto;
-import com.sparta.ecommerce.user.dto.LoginResponseDto;
-import com.sparta.ecommerce.user.service.AuthService;
+import com.sparta.ecommerce.userservice.dto.LoginRequestDto;
+import com.sparta.ecommerce.userservice.dto.LoginResponseDto;
+import com.sparta.ecommerce.userservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

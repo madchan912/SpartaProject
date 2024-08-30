@@ -1,7 +1,7 @@
-package com.sparta.ecommerce.order.entity;
+package com.sparta.ecommerce.orderservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sparta.ecommerce.product.entity.Product;
+import com.sparta.ecommerce.productservice.entity.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

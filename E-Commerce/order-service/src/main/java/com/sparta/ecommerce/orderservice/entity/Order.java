@@ -1,6 +1,6 @@
-package com.sparta.ecommerce.order.entity;
+package com.sparta.ecommerce.orderservice.entity;
 
-import com.sparta.ecommerce.user.entity.User;
+import com.sparta.ecommerce.userservice.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +29,5 @@ public class Order {
     private String status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    private List<com.sparta.ecommerce.orderservice.entity.OrderItem> orderItems;
 }

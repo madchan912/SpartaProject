@@ -1,8 +1,8 @@
-package com.sparta.ecommerce.product.controller;
+package com.sparta.ecommerce.productservice.controller;
 
-import com.sparta.ecommerce.product.dto.ProductDetailResponseDto;
-import com.sparta.ecommerce.product.dto.ProductResponseDto;
-import com.sparta.ecommerce.product.service.ProductService;
+import com.sparta.ecommerce.productservice.dto.ProductDetailResponseDto;
+import com.sparta.ecommerce.productservice.dto.ProductResponseDto;
+import com.sparta.ecommerce.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

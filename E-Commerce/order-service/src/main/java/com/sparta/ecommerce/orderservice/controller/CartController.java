@@ -1,9 +1,9 @@
-package com.sparta.ecommerce.order.controller;
+package com.sparta.ecommerce.orderservice.controller;
 
-import com.sparta.ecommerce.order.dto.CartRequestDto;
-import com.sparta.ecommerce.order.dto.CartResponseDto;
-import com.sparta.ecommerce.order.entity.Cart;
-import com.sparta.ecommerce.order.service.CartService;
+import com.sparta.ecommerce.orderservice.dto.CartRequestDto;
+import com.sparta.ecommerce.orderservice.dto.CartResponseDto;
+import com.sparta.ecommerce.orderservice.entity.Cart;
+import com.sparta.ecommerce.orderservice.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

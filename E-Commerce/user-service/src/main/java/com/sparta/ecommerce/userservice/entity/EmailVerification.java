@@ -1,4 +1,4 @@
-package com.sparta.ecommerce.user.entity;
+package com.sparta.ecommerce.userservice.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

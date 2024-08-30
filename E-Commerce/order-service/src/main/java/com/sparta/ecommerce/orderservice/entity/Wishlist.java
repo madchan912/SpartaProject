@@ -1,7 +1,7 @@
-package com.sparta.ecommerce.order.entity;
+package com.sparta.ecommerce.orderservice.entity;
 
-import com.sparta.ecommerce.product.entity.Product;
-import com.sparta.ecommerce.user.entity.User;
+import com.sparta.ecommerce.productservice.entity.Product;
+import com.sparta.ecommerce.userservice.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

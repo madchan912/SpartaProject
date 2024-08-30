@@ -1,11 +1,11 @@
-package com.sparta.ecommerce.product.service;
+package com.sparta.ecommerce.productservice.service;
 
-import com.sparta.ecommerce.product.dto.ProductDetailResponseDto;
-import com.sparta.ecommerce.product.dto.ProductResponseDto;
-import com.sparta.ecommerce.product.entity.Product;
-import com.sparta.ecommerce.product.entity.ProductDetail;
-import com.sparta.ecommerce.product.repository.ProductDetailRepository;
-import com.sparta.ecommerce.product.repository.ProductRepository;
+import com.sparta.ecommerce.productservice.dto.ProductDetailResponseDto;
+import com.sparta.ecommerce.productservice.dto.ProductResponseDto;
+import com.sparta.ecommerce.productservice.entity.Product;
+import com.sparta.ecommerce.productservice.entity.ProductDetail;
+import com.sparta.ecommerce.productservice.repository.ProductDetailRepository;
+import com.sparta.ecommerce.productservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

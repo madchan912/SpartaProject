@@ -1,7 +1,7 @@
-package com.sparta.ecommerce.user.service;
+package com.sparta.ecommerce.userservice.service;
 
-import com.sparta.ecommerce.user.entity.User;
-import com.sparta.ecommerce.user.repository.UserRepository;
+import com.sparta.ecommerce.userservice.entity.User;
+import com.sparta.ecommerce.userservice.repository.UserRepository;
 import com.sparta.ecommerce.common.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

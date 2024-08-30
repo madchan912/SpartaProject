@@ -1,4 +1,4 @@
-package com.sparta.ecommerce.user.dto;
+package com.sparta.ecommerce.userservice.dto;
 
 import lombok.Getter;
 import lombok.Setter;

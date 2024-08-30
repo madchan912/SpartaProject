@@ -1,8 +1,8 @@
-package com.sparta.ecommerce.order.controller;
+package com.sparta.ecommerce.orderservice.controller;
 
-import com.sparta.ecommerce.order.dto.WishlistRequestDto;
-import com.sparta.ecommerce.order.dto.WishlistResponseDto;
-import com.sparta.ecommerce.order.service.WishlistService;
+import com.sparta.ecommerce.orderservice.dto.WishlistRequestDto;
+import com.sparta.ecommerce.orderservice.dto.WishlistResponseDto;
+import com.sparta.ecommerce.orderservice.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package com.sparta.ecommerce.user.repository;
+package com.sparta.ecommerce.userservice.repository;
 
-import com.sparta.ecommerce.user.entity.User;
+import com.sparta.ecommerce.userservice.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

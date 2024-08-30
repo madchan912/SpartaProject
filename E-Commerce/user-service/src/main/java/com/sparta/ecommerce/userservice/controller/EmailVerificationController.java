@@ -1,6 +1,6 @@
-package com.sparta.ecommerce.user.controller;
+package com.sparta.ecommerce.userservice.controller;
 
-import com.sparta.ecommerce.user.service.EmailVerificationService;
+import com.sparta.ecommerce.userservice.service.EmailVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

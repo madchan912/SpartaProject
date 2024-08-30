@@ -1,15 +1,15 @@
-package com.sparta.ecommerce.order.service;
+package com.sparta.ecommerce.orderservice.service;
 
-import com.sparta.ecommerce.order.dto.OrderRequestDto;
-import com.sparta.ecommerce.order.dto.OrderResponseDto;
-import com.sparta.ecommerce.order.entity.Order;
-import com.sparta.ecommerce.order.entity.OrderItem;
-import com.sparta.ecommerce.product.entity.Product;
-import com.sparta.ecommerce.user.entity.User;
-import com.sparta.ecommerce.order.repository.OrderItemRepository;
-import com.sparta.ecommerce.product.repository.ProductRepository;
-import com.sparta.ecommerce.user.repository.UserRepository;
-import com.sparta.ecommerce.order.repository.OrderRepository;
+import com.sparta.ecommerce.orderservice.dto.OrderRequestDto;
+import com.sparta.ecommerce.orderservice.dto.OrderResponseDto;
+import com.sparta.ecommerce.orderservice.entity.Order;
+import com.sparta.ecommerce.orderservice.entity.OrderItem;
+import com.sparta.ecommerce.orderservice.repository.OrderItemRepository;
+import com.sparta.ecommerce.orderservice.repository.OrderRepository;
+import com.sparta.ecommerce.productservice.entity.Product;
+import com.sparta.ecommerce.productservice.repository.ProductRepository;
+import com.sparta.ecommerce.userservice.entity.User;
+import com.sparta.ecommerce.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

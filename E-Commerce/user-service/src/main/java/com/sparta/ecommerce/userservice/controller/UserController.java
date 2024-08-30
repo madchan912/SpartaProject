@@ -1,9 +1,9 @@
-package com.sparta.ecommerce.user.controller;
+package com.sparta.ecommerce.userservice.controller;
 
-import com.sparta.ecommerce.user.dto.UserProfileUpdateDto;
-import com.sparta.ecommerce.user.dto.UserRegisterRequestDto;
-import com.sparta.ecommerce.user.dto.UserRegisterResponseDto;
-import com.sparta.ecommerce.user.service.UserService;
+import com.sparta.ecommerce.userservice.dto.UserProfileUpdateDto;
+import com.sparta.ecommerce.userservice.dto.UserRegisterRequestDto;
+import com.sparta.ecommerce.userservice.dto.UserRegisterResponseDto;
+import com.sparta.ecommerce.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
