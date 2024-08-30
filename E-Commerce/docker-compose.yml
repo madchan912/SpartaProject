@@ -1,18 +1,15 @@
 version: '3.9'
 services:
-  ecommerce:
+  eureka-server:
     build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      db:
-        condition: service_healthy
+      context: ./eureka-server  # Eureka 서버 소스 코드가 위치한 경로
+      dockerfile: Dockerfile  # 해당 서비스에 사용할 Dockerfile
     ports:
-      - "8080:8080"
+      - "8761:8761"  # 외부 포트 8761을 컨테이너의 8761 포트에 매핑
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_PROFILES_ACTIVE=default  # 프로파일 설정 (필요한 경우)
+    networks:
+      - eureka-net
 
   db:
     image: mysql:8.0
@@ -28,6 +25,8 @@ services:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p1234 && sleep 5"]
       interval: 5s
       retries: 10
+    networks:
+      - eureka-net
 
   common:
     build:
@@ -36,13 +35,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      eureka-server:
+        condition: service_started
     ports:
-      - "8084:8080"  # 외부 포트 8084, 내부 포트 8080
+      - "8084:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
-
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - eureka-net
 
   user-service:
     build:
@@ -51,13 +54,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      eureka-server:
+        condition: service_started
     ports:
-      - "8081:8080"  # 외부 포트 8081, 내부 포트 8080
+      - "8081:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
-
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - eureka-net
 
   product-service:
     build:
@@ -66,14 +73,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      eureka-server:
+        condition: service_started
     ports:
-      - "8082:8080"  # 외부 포트 8082, 내부 포트 8080
+      - "8082:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
-
-
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - eureka-net
 
   order-service:
     build:
@@ -82,12 +92,20 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      eureka-server:
+        condition: service_started
     ports:
-      - "8083:8080"  # 외부 포트 8083, 내부 포트 8080
+      - "8083:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - eureka-net
 
 volumes:
   mysql_data:
+
+networks:
+  eureka-net:
