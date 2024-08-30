@@ -18,6 +18,11 @@ repositories {
 }
 
 dependencies {
+	// 다른 서비스 의존성 추가
+	implementation project(':common')
+	implementation project(':user-service')  // user-service 모듈 의존성 추가
+	implementation project(':product-service')  // product-service 모듈 의존성 추가
+
 	// Spring Boot JPA와 Web을 사용하기 위한 의존성
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
   ecommerce:
     build:
@@ -28,5 +28,66 @@ services:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p1234 && sleep 5"]
       interval: 5s
       retries: 10
+
+  common:
+    build:
+      context: ./common
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8084:8080"  # 외부 포트 8084, 내부 포트 8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8081:8080"  # 외부 포트 8081, 내부 포트 8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8082:8080"  # 외부 포트 8082, 내부 포트 8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+
+
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8083:8080"  # 외부 포트 8083, 내부 포트 8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+
 volumes:
   mysql_data:
