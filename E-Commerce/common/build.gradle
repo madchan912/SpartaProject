@@ -18,35 +18,35 @@ repositories {
 }
 
 dependencies {
-	// Spring Boot Web을 사용하기 위한 의존성
+	// Spring Boot JPA와 Web을 사용하기 위한 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// Spring Security를 사용하기 위한 의존성
+	// AES 암호화/복호화를 위한 Spring Security 의존성 추가
+	// 암호 해싱을 위한 의존성 추가
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-
-	// JWT 관련 의존성
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	// Lombok 사용을 위한 의존성
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// MySQL 데이터베이스 드라이버
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
 	// 테스트 관련 의존성
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Spring Boot 이메일 전송 의존성
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	// JWT token
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-bootJar {
-	enabled = false
-}
-
-jar {
-	enabled = true
 }
 
 test {

@@ -1,4 +1,4 @@
-package com.sparta.common;
+package com.sparta.ecommerce.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

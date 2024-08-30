@@ -1,4 +1,4 @@
-package com.sparta.common.util;
+package com.sparta.ecommerce.common.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
