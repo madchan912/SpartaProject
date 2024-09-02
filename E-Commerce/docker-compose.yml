@@ -28,25 +28,6 @@ services:
     networks:
       - eureka-net
 
-  common:
-    build:
-      context: ./common
-      dockerfile: Dockerfile
-    depends_on:
-      db:
-        condition: service_healthy
-      eureka-server:
-        condition: service_started
-    ports:
-      - "8084:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/project?useSSL=false&serverTimezone=UTC
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=1234
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
-    networks:
-      - eureka-net
-
   user-service:
     build:
       context: ./user-service
