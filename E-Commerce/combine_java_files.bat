@@ -35,15 +35,17 @@ for %%F in (%PROJECT_DIR%\build.gradle %PROJECT_DIR%\settings.gradle %PROJECT_DI
     )
 )
 
-REM 각 모듈 디렉토리 내 Dockerfile 및 docker-compose.yml 파일 포함
+REM 각 모듈 디렉토리 내 Dockerfile 및 docker-compose.yml 파일 포함 (파일이 존재하는 경우에만 처리)
 for /r "%PROJECT_DIR%" %%F in (Dockerfile docker-compose.yml) do (
-    echo File: %%F >> %OUTPUT_FILE%
-    echo -------- >> %OUTPUT_FILE%
-    type "%%F" >> %OUTPUT_FILE%
-    echo. >> %OUTPUT_FILE%
-    echo. >> %OUTPUT_FILE%
-    echo -------- >> %OUTPUT_FILE%
-    echo. >> %OUTPUT_FILE%
+    if exist %%F (
+        echo File: %%F >> %OUTPUT_FILE%
+        echo -------- >> %OUTPUT_FILE%
+        type "%%F" >> %OUTPUT_FILE%
+        echo. >> %OUTPUT_FILE%
+        echo. >> %OUTPUT_FILE%
+        echo -------- >> %OUTPUT_FILE%
+        echo. >> %OUTPUT_FILE%
+    )
 )
 
 echo Java 및 설정 파일이 %OUTPUT_FILE% 에 결합되었습니다.
