@@ -30,7 +30,7 @@ public class UserController {
 
     // 특정 대상 정보
     @GetMapping("/user/{userId}")
-    public ResponseEntity<UserRegisterRequestDto> getUser(@PathVariable Long userId) {
+    public ResponseEntity<UserRegisterRequestDto> getUser(@PathVariable("userId") Long userId) {
         try {
             UserRegisterRequestDto responseDto = userService.getUserInfo(userId);
             return ResponseEntity.ok(responseDto);
