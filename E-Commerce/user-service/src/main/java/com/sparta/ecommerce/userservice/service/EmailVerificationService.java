@@ -42,7 +42,7 @@ public class EmailVerificationService {
             // 이메일 전송 로직 추가
             String subject = "이메일 인증 요청";
             String text = "다음 링크를 클릭하여 이메일 인증을 완료하세요: " +
-                    "http://localhost:8080/verify?code=" + verificationCode;
+                    "http://localhost:8081/verify?code=" + verificationCode;
 
             sendEmail(userEmail, subject, text);
 
